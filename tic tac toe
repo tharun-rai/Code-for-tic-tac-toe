@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+int main() {
+    char a[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+    char move = 'X';
+    int pos;
+    int winner = 0;
+
+    for (int i = 1; i <= 9; i++) 
+    {
+        printf("Enter your position (1-9): ", move);
+        scanf("%d", &pos);
+        if (pos < 1 || pos > 9 || a[pos - 1] != ' ') {
+            printf("Invalid move! Try again.\n");
+            i--;        
+            continue;
+        }
+
+        a[pos - 1] = move;
+        printf(" %c | %c | %c\n", a[0], a[1], a[2]);
+        printf("---+---+---\n");
+        printf(" %c | %c | %c\n", a[3], a[4], a[5]);
+        printf("---+---+---\n");
+        printf(" %c | %c | %c\n", a[6], a[7], a[8]);
+
+        if ((a[0] == move && a[1] == move && a[2] == move) ||
+            (a[3] == move && a[4] == move && a[5] == move) ||
+            (a[6] == move && a[7] == move && a[8] == move) ||
+            (a[0] == move && a[3] == move && a[6] == move) ||
+            (a[1] == move && a[4] == move && a[7] == move) ||
+            (a[2] == move && a[5] == move && a[8] == move) ||
+            (a[0] == move && a[4] == move && a[8] == move) ||
+            (a[2] == move && a[4] == move && a[6] == move)) {
+
+            printf("Good job, Player %c wins!\n", move);
+            winner = 1;
+            break;
+        }
+
+        
+        move = (move == 'X') ? 'O' : 'X';
+    }
+
+    if (!winner) {
+        printf("It's a tie!\n");
+    }
+
+    return 0;
+}
